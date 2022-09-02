@@ -104,7 +104,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, _, err := api.ZoneLevelAccessApplications(context.Background(), zoneID, cloudflare.PaginationOptions{})
@@ -113,7 +116,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 		case "cloudflare_access_group":
@@ -124,7 +130,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, _, err := api.ZoneLevelAccessGroups(context.Background(), zoneID, cloudflare.PaginationOptions{})
@@ -133,7 +142,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 		case "cloudflare_access_identity_provider":
@@ -144,7 +156,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, err := api.ZoneLevelAccessIdentityProviders(context.Background(), zoneID)
@@ -153,7 +168,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 		case "cloudflare_access_service_token":
@@ -164,7 +182,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, _, err := api.ZoneLevelAccessServiceTokens(context.Background(), zoneID)
@@ -173,7 +194,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 		case "cloudflare_access_mutual_tls_certificate":
@@ -183,7 +207,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_access_rule":
 			if accountID != "" {
@@ -191,9 +218,11 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				if err != nil {
 					log.Fatal(err)
 				}
-
 				resourceCount = len(jsonPayload.Result)
-				m, _ := json.Marshal(jsonPayload.Result)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, err := api.ListZoneAccessRules(context.Background(), zoneID, cloudflare.AccessRule{}, 1)
@@ -202,7 +231,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload.Result)
-				m, _ := json.Marshal(jsonPayload.Result)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 		case "cloudflare_account_member":
@@ -212,7 +244,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			// remap email and role_ids into the right structure.
@@ -241,7 +276,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 
 			resourceCount = 1
 
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for _, b := range jsonStructData {
@@ -261,7 +299,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -282,7 +323,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			// remap ID to prefix_id and advertised to advertisement on the JSON payloads.
@@ -310,7 +354,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			jsonPayload = customerManagedCertificates
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_custom_pages":
 			if accountID != "" {
@@ -321,7 +368,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				zo := cloudflare.CustomPageOptions{ZoneID: zoneID}
@@ -331,7 +381,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			}
 
@@ -351,7 +404,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				jsonPayload = append(jsonPayload, apiCall)
 			}
 
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -365,7 +421,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_firewall_rule":
 			jsonPayload, _, err := api.FirewallRules(context.Background(), cloudflare.ZoneIdentifier(zoneID), cloudflare.FirewallRuleListParams{})
@@ -374,7 +433,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			// remap Filter.ID to `filter_id` on the JSON payloads.
@@ -388,7 +450,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -401,7 +466,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_healthcheck":
 			jsonPayload, err := api.Healthchecks(context.Background(), zoneID)
@@ -410,7 +478,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_load_balancer":
 			jsonPayload, err := api.ListLoadBalancers(context.Background(), zoneID)
@@ -419,7 +490,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -433,7 +507,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -451,7 +528,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_logpush_job":
 			jsonPayload, err := api.LogpushJobs(context.Background(), zoneID)
@@ -460,7 +540,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -481,7 +564,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			managedHeaders = append(managedHeaders, jsonPayload)
 
 			resourceCount = len(managedHeaders)
-			m, _ := json.Marshal(managedHeaders)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -494,7 +580,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_page_rule":
 			jsonPayload, err := api.ListPageRules(context.Background(), zoneID)
@@ -503,7 +592,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -554,7 +646,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -583,7 +678,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -631,7 +729,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 			} else {
 				jsonPayload, err := api.ListZoneRulesets(context.Background(), zoneID)
@@ -683,7 +784,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				}
 
 				resourceCount = len(jsonPayload)
-				m, _ := json.Marshal(jsonPayload)
+				m, err := json.Marshal(jsonPayload)
+				if err != nil {
+					log.Fatal(err)
+				}
 				json.Unmarshal(m, &jsonStructData)
 
 				// Make the rules have the correct header structure
@@ -800,7 +904,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			for i := 0; i < resourceCount; i++ {
@@ -815,7 +922,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_waf_package":
 			jsonPayload, err := api.ListWAFPackages(context.Background(), zoneID)
@@ -824,7 +934,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_waiting_room":
 			jsonPayload, err := api.ListWaitingRooms(context.Background(), zoneID)
@@ -832,7 +945,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				log.Fatal(err)
 			}
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_workers_kv_namespace":
 			jsonPayload, err := api.ListWorkersKVNamespaces(context.Background())
@@ -840,7 +956,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				log.Fatal(err)
 			}
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 		case "cloudflare_worker_route":
 			jsonPayload, err := api.ListWorkerRoutes(context.Background(), zoneID)
@@ -848,7 +967,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 				log.Fatal(err)
 			}
 			resourceCount = len(jsonPayload.Routes)
-			m, _ := json.Marshal(jsonPayload.Routes)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			// remap "script_name" to the "script" value.
@@ -862,7 +984,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			// - remap "zone" to the "name" value
@@ -882,7 +1007,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = len(jsonPayload)
-			m, _ := json.Marshal(jsonPayload)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 		case "cloudflare_zone_settings_override":
@@ -892,7 +1020,10 @@ func generateResources() func(cmd *cobra.Command, args []string) {
 			}
 
 			resourceCount = 1
-			m, _ := json.Marshal(jsonPayload.Result)
+			m, err := json.Marshal(jsonPayload)
+			if err != nil {
+				log.Fatal(err)
+			}
 			json.Unmarshal(m, &jsonStructData)
 
 			zoneSettingsStruct := make(map[string]interface{})
